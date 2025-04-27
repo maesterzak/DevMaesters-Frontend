@@ -1,0 +1,82 @@
+import { Navbar } from "@/components/navbar"
+import { Button } from "@/components/ui/button"
+import { Briefcase } from "lucide-react"
+import Image from "next/image"
+
+const projects = [
+  {
+    title: "E-commerce Platform",
+    description: "A modern e-commerce solution built with Next.js and Stripe",
+    image: "/placeholder.svg?height=300&width=400",
+    technologies: ["Next.js", "React", "Stripe", "Tailwind CSS"],
+  },
+  {
+    title: "Task Management App",
+    description: "A collaborative task management tool with real-time updates",
+    image: "/placeholder.svg?height=300&width=400",
+    technologies: ["React", "Firebase", "Material-UI"],
+  },
+  {
+    title: "Social Media Dashboard",
+    description: "A comprehensive dashboard for managing multiple social media accounts",
+    image: "/placeholder.svg?height=300&width=400",
+    technologies: ["Vue.js", "Node.js", "Express", "MongoDB"],
+  },
+  {
+    title: "Fitness Tracking App",
+    description: "A mobile app for tracking workouts and nutrition",
+    image: "/placeholder.svg?height=300&width=400",
+    technologies: ["React Native", "Redux", "Firebase"],
+  },
+]
+
+export default function PortfolioPage() {
+  return (
+    <main className="min-h-screen bg-background">
+      <Navbar />
+      <div className="container py-24">
+        <div className="flex flex-col items-center text-center mb-12">
+          <div className="rounded-full bg-primary/10 p-3 text-primary">
+            <Briefcase className="h-6 w-6" />
+          </div>
+          <h1 className="mt-4 text-4xl font-bold">Our Portfolio</h1>
+          <p className="mt-4 max-w-[58rem] text-muted-foreground">
+            Explore our showcase of successful projects. See how we've helped businesses and individuals bring their
+            ideas to life through innovative web solutions.
+          </p>
+        </div>
+        <div className="grid gap-8 md:grid-cols-2">
+          {projects.map((project) => (
+            <div
+              key={project.title}
+              className="group relative overflow-hidden rounded-lg border bg-background transition-all hover:shadow-md"
+            >
+              <Image
+                src={project.image || "/placeholder.svg"}
+                alt={project.title}
+                width={400}
+                height={300}
+                className="w-full object-cover transition-transform group-hover:scale-105"
+              />
+              <div className="p-6">
+                <h2 className="font-semibold">{project.title}</h2>
+                <p className="mt-2 text-sm text-muted-foreground">{project.description}</p>
+                <div className="mt-4 flex flex-wrap gap-2">
+                  {project.technologies.map((tech) => (
+                    <span key={tech} className="inline-block bg-primary/10 text-primary text-xs px-2 py-1 rounded-full">
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+        <div className="mt-12 flex justify-center">
+          <Button>View More Projects</Button>
+        </div>
+      </div>
+    </main>
+  )
+}
+

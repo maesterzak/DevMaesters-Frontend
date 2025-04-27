@@ -1,0 +1,93 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 0 0% 100%;
+    --foreground: 38 100% 10%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 38 100% 10%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 38 100% 10%;
+
+    --primary: 38 100% 36%;
+    --primary-foreground: 0 0% 100%;
+
+    --secondary: 38 30% 96%;
+    --secondary-foreground: 38 100% 10%;
+
+    --muted: 38 30% 96%;
+    --muted-foreground: 38 30% 40%;
+
+    --accent: 38 30% 96%;
+    --accent-foreground: 38 100% 10%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 0 0% 100%;
+
+    --border: 38 30% 90%;
+    --input: 38 30% 90%;
+    --ring: 38 100% 36%;
+
+    --radius: 0.5rem;
+  }
+
+  .dark {
+    --background: 38 30% 8%;
+    --foreground: 38 10% 98%;
+
+    --card: 38 30% 8%;
+    --card-foreground: 38 10% 98%;
+
+    --popover: 38 30% 8%;
+    --popover-foreground: 38 10% 98%;
+
+    --primary: 38 100% 50%;
+    --primary-foreground: 38 30% 8%;
+
+    --secondary: 38 30% 15%;
+    --secondary-foreground: 38 10% 98%;
+
+    --muted: 38 30% 15%;
+    --muted-foreground: 38 30% 65%;
+
+    --accent: 38 30% 15%;
+    --accent-foreground: 38 10% 98%;
+
+    --destructive: 0 62.8% 30.6%;
+    --destructive-foreground: 38 10% 98%;
+
+    --border: 38 30% 20%;
+    --input: 38 30% 20%;
+    --ring: 38 100% 50%;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+  }
+}
+
+@layer components {
+  .tech-grid {
+    @apply bg-[linear-gradient(to_right,theme(colors.primary.DEFAULT/5%)_1px,transparent_1px),linear-gradient(to_bottom,theme(colors.primary.DEFAULT/5%)_1px,transparent_1px)];
+    background-size: 20px 20px;
+  }
+
+  .glow {
+    @apply shadow-[0_0_10px_theme(colors.primary.DEFAULT/30%),0_0_20px_theme(colors.primary.DEFAULT/20%),0_0_30px_theme(colors.primary.DEFAULT/10%)];
+  }
+
+  .text-glow {
+    @apply [text-shadow:0_0_10px_theme(colors.primary.DEFAULT/50%),0_0_20px_theme(colors.primary.DEFAULT/30%),0_0_30px_theme(colors.primary.DEFAULT/10%)];
+  }
+}
+

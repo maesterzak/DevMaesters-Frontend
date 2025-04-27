@@ -1,0 +1,297 @@
+import { Navbar } from "@/components/navbar"
+import { Button } from "@/components/ui/button"
+import { Input } from "@/components/ui/input"
+import { Textarea } from "@/components/ui/textarea"
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { Badge } from "@/components/ui/badge"
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
+import { Github, Twitter, Linkedin, Mail, Globe, Building2, GraduationCap, Calendar } from "lucide-react"
+import Image from "next/image"
+
+// This would typically come from a database or API
+const portfolioData = {
+  name: "Jane Doe",
+  title: "Full Stack Developer",
+  avatar: "/placeholder.svg?height=200&width=200",
+  about:
+    "I'm a passionate full stack developer with 5 years of experience in building web applications. I love working with React, Node.js, and GraphQL to create scalable and performant solutions.",
+  skills: ["React", "Node.js", "GraphQL", "TypeScript", "Next.js", "MongoDB", "AWS"],
+  education: [
+    {
+      degree: "Master of Science in Computer Science",
+      school: "Stanford University",
+      location: "Stanford, CA",
+      period: "2018 - 2020",
+      description:
+        "Specialized in Artificial Intelligence and Machine Learning. Thesis on 'Deep Learning Applications in Web Development'.",
+    },
+    {
+      degree: "Bachelor of Science in Software Engineering",
+      school: "University of California, Berkeley",
+      location: "Berkeley, CA",
+      period: "2014 - 2018",
+      description: "Graduated with honors. Led the university's web development club.",
+    },
+  ],
+  employment: [
+    {
+      title: "Senior Full Stack Developer",
+      company: "Tech Innovators Inc.",
+      location: "San Francisco, CA",
+      period: "2020 - Present",
+      description:
+        "Leading a team of 5 developers, architecting and implementing scalable web applications using React and Node.js. Improved system performance by 40%.",
+      achievements: [
+        "Implemented microservices architecture that reduced deployment time by 60%",
+        "Led the migration from monolith to microservices",
+        "Mentored 3 junior developers",
+      ],
+    },
+    {
+      title: "Full Stack Developer",
+      company: "Digital Solutions Ltd",
+      location: "San Jose, CA",
+      period: "2018 - 2020",
+      description: "Developed and maintained multiple client projects using React, Node.js, and MongoDB.",
+      achievements: [
+        "Reduced loading time by 50% through optimization",
+        "Implemented automated testing that caught 90% of bugs",
+        "Developed reusable component library",
+      ],
+    },
+    {
+      title: "Software Engineering Intern",
+      company: "StartUp Hub",
+      location: "Mountain View, CA",
+      period: "Summer 2017",
+      description: "Worked on the frontend team to develop new features and fix bugs.",
+      achievements: ["Developed new user dashboard", "Implemented responsive design", "Fixed 30+ critical bugs"],
+    },
+  ],
+  projects: [
+    {
+      title: "E-commerce Platform",
+      description: "A modern e-commerce solution built with Next.js and Stripe",
+      image: "/placeholder.svg?height=300&width=400",
+      link: "https://example.com/project1",
+    },
+    {
+      title: "Task Management App",
+      description: "A collaborative task management tool with real-time updates",
+      image: "/placeholder.svg?height=300&width=400",
+      link: "https://example.com/project2",
+    },
+    {
+      title: "Personal Finance Tracker",
+      description: "A mobile app for tracking expenses and managing budgets",
+      image: "/placeholder.svg?height=300&width=400",
+      link: "https://example.com/project3",
+    },
+  ],
+  contact: {
+    email: "jane.doe@example.com",
+    github: "https://github.com/janedoe",
+    twitter: "https://twitter.com/janedoe",
+    linkedin: "https://linkedin.com/in/janedoe",
+    website: "https://janedoe.com",
+  },
+}
+
+function TimelineItem({
+  title,
+  subtitle,
+  period,
+  location,
+  description,
+  achievements,
+  icon: Icon,
+}: {
+  title: string
+  subtitle: string
+  period: string
+  location: string
+  description: string
+  achievements?: string[]
+  icon: typeof Building2 | typeof GraduationCap
+}) {
+  return (
+    <div className="relative pl-8 pb-8 border-l border-border last:pb-0">
+      <div className="absolute left-[-8px] top-0 w-4 h-4 rounded-full bg-primary flex items-center justify-center">
+        <Icon className="w-3 h-3 text-primary-foreground" />
+      </div>
+      <div className="space-y-2">
+        <div className="flex items-center gap-2">
+          <Calendar className="w-4 h-4 text-muted-foreground" />
+          <span className="text-sm text-muted-foreground">{period}</span>
+        </div>
+        <h3 className="text-lg font-semibold">{title}</h3>
+        <p className="font-medium text-primary">{subtitle}</p>
+        <p className="text-sm text-muted-foreground">{location}</p>
+        <p className="text-sm">{description}</p>
+        {achievements && achievements.length > 0 && (
+          <ul className="list-disc list-inside text-sm space-y-1">
+            {achievements.map((achievement, index) => (
+              <li key={index} className="text-muted-foreground">
+                {achievement}
+              </li>
+            ))}
+          </ul>
+        )}
+      </div>
+    </div>
+  )
+}
+
+export default function PortfolioPage() {
+  return (
+    <main className="min-h-screen bg-background">
+      <Navbar />
+      <div className="container py-24">
+        <div className="grid gap-12 lg:grid-cols-3">
+          <div className="lg:col-span-2 space-y-12">
+            <section>
+              <h1 className="text-4xl font-bold mb-4">{portfolioData.name}</h1>
+              <h2 className="text-2xl text-muted-foreground mb-8">{portfolioData.title}</h2>
+              <div className="flex items-center space-x-4 mb-8">
+                <Avatar className="h-24 w-24">
+                  <AvatarImage src={portfolioData.avatar} alt={portfolioData.name} />
+                  <AvatarFallback>{portfolioData.name[0]}</AvatarFallback>
+                </Avatar>
+                <div>
+                  <p className="text-lg">{portfolioData.about}</p>
+                </div>
+              </div>
+              <div className="flex space-x-4">
+                <a href={portfolioData.contact.github} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Github className="h-5 w-5" />
+                    <span className="sr-only">GitHub</span>
+                  </Button>
+                </a>
+                <a href={portfolioData.contact.twitter} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Twitter className="h-5 w-5" />
+                    <span className="sr-only">Twitter</span>
+                  </Button>
+                </a>
+                <a href={portfolioData.contact.linkedin} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Linkedin className="h-5 w-5" />
+                    <span className="sr-only">LinkedIn</span>
+                  </Button>
+                </a>
+                <a href={`mailto:${portfolioData.contact.email}`}>
+                  <Button variant="outline" size="icon">
+                    <Mail className="h-5 w-5" />
+                    <span className="sr-only">Email</span>
+                  </Button>
+                </a>
+                <a href={portfolioData.contact.website} target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <Globe className="h-5 w-5" />
+                    <span className="sr-only">Website</span>
+                  </Button>
+                </a>
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-6">Employment History</h2>
+              <div className="space-y-0">
+                {portfolioData.employment.map((job, index) => (
+                  <TimelineItem
+                    key={index}
+                    icon={Building2}
+                    title={job.title}
+                    subtitle={job.company}
+                    period={job.period}
+                    location={job.location}
+                    description={job.description}
+                    achievements={job.achievements}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-6">Education</h2>
+              <div className="space-y-0">
+                {portfolioData.education.map((edu, index) => (
+                  <TimelineItem
+                    key={index}
+                    icon={GraduationCap}
+                    title={edu.degree}
+                    subtitle={edu.school}
+                    period={edu.period}
+                    location={edu.location}
+                    description={edu.description}
+                  />
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Skills</h2>
+              <div className="flex flex-wrap gap-2">
+                {portfolioData.skills.map((skill) => (
+                  <Badge key={skill} variant="secondary">
+                    {skill}
+                  </Badge>
+                ))}
+              </div>
+            </section>
+
+            <section>
+              <h2 className="text-2xl font-bold mb-4">Projects</h2>
+              <div className="grid gap-6 md:grid-cols-2">
+                {portfolioData.projects.map((project) => (
+                  <Card key={project.title}>
+                    <CardHeader>
+                      <CardTitle>{project.title}</CardTitle>
+                      <CardDescription>{project.description}</CardDescription>
+                    </CardHeader>
+                    <CardContent>
+                      <Image
+                        src={project.image || "/placeholder.svg"}
+                        alt={project.title}
+                        width={400}
+                        height={300}
+                        className="w-full rounded-lg object-cover"
+                      />
+                      <Button asChild className="mt-4">
+                        <a href={project.link} target="_blank" rel="noopener noreferrer">
+                          View Project
+                        </a>
+                      </Button>
+                    </CardContent>
+                  </Card>
+                ))}
+              </div>
+            </section>
+          </div>
+
+          <div>
+            <Card className="sticky top-24">
+              <CardHeader>
+                <CardTitle>Contact Me for Work</CardTitle>
+                <CardDescription>Interested in working together? Send me a message!</CardDescription>
+              </CardHeader>
+              <CardContent>
+                <form className="space-y-4">
+                  <Input placeholder="Your Name" />
+                  <Input type="email" placeholder="Your Email" />
+                  <Input placeholder="Subject" />
+                  <Textarea placeholder="Your Message" className="min-h-[150px]" />
+                  <Button type="submit" className="w-full">
+                    Send Message
+                  </Button>
+                </form>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </div>
+    </main>
+  )
+}
+
