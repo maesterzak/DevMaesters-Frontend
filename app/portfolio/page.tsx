@@ -6,7 +6,7 @@ import { Textarea } from "@/components/ui/textarea"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Github, Twitter, Linkedin, Mail, Globe, Building2, GraduationCap, Calendar } from "lucide-react"
+import { Github, Twitter, Linkedin, Mail, Globe, Building2, GraduationCap, Calendar, FileText } from "lucide-react"
 import Image from "next/image"
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
@@ -18,7 +18,7 @@ const portfolioData = {
   name: "Abubakar Agigasokoa Zakari",
   title: "Full Stack Developer",
   avatar: "/placeholder.svg?height=200&width=200",
-  about: "I'm a Full Stack Developer with 3+ years of experience building fast, reliable, and scalable web applications. I work with React, Next.js, Django, PostgreSQL, and GraphQL to create seamless digital experiences. Currently, I’m an Application Support/Customization Officer at Wema Bank PLC, where I specialize in Finacle application support, FI service development, Connect24 integrations, and system enhancements. Whether it’s web development or core banking customization, I’m passionate about building technology that drives results.",
+  about: "I'm a Full Stack Developer with 3+ years of experience building fast, reliable, and scalable web applications. I work with React, Next.js, Django, PostgreSQL, and GraphQL to create seamless digital experiences. Currently, I'm an Application Support/Customization Officer at Wema Bank PLC, where I specialize in Finacle application support, FI service development, Connect24 integrations, and system enhancements. Whether it's web development or core banking customization, I'm passionate about building technology that drives results.",
   skills: ["Finacle Customization","Finacle Connect 24","Finacle FI Services","React","Next.js","vite", "Django", "GraphQL", "TypeScript","Javascript","Python", "MongoDB","PostgreSQL", "AWS","Electron", "React Native"],
   education: [
     {
@@ -267,6 +267,12 @@ export default function PortfolioPage() {
                   <Button variant="outline" size="icon">
                     <Globe className="h-5 w-5" />
                     <span className="sr-only">Website</span>
+                  </Button>
+                </a>
+                <a href="/Abubakar_Zakari_Resume.pdf" target="_blank" rel="noopener noreferrer">
+                  <Button variant="outline" size="icon">
+                    <FileText className="h-5 w-5" />
+                    <span className="sr-only">Resume</span>
                   </Button>
                 </a>
               </div>
