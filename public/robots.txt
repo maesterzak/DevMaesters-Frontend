@@ -1,0 +1,17 @@
+# *
+User-agent: *
+Disallow: /mini-mall/*
+Disallow: /online-solver/*
+Disallow: /login/*
+Disallow: /register/*
+
+# *
+User-agent: *
+Allow: /
+
+# Host
+Host: https://www.devmaesters.com
+
+# Sitemaps
+Sitemap: https://www.devmaesters.com/sitemap.xml
+Sitemap: https://www.devmaesters.com/server-sitemap.xml

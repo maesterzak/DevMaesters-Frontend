@@ -18,9 +18,8 @@ const portfolioData = {
   name: "Abubakar Agigasokoa Zakari",
   title: "Full Stack Developer",
   avatar: "/placeholder.svg?height=200&width=200",
-  about:
-    "I'm a passionate full stack developer with 3 years of experience in building web applications. I love working with React, Django, and GraphQL to create scalable and performant solutions.",
-  skills: ["React", "Django", "GraphQL", "TypeScript","Javascript", "Next.js", "MongoDB","PostgreSQL", "AWS","Electron"],
+  about: "I'm a Full Stack Developer with 3+ years of experience building fast, reliable, and scalable web applications. I work with React, Next.js, Django, PostgreSQL, and GraphQL to create seamless digital experiences. Currently, I’m an Application Support/Customization Officer at Wema Bank PLC, where I specialize in Finacle application support, FI service development, Connect24 integrations, and system enhancements. Whether it’s web development or core banking customization, I’m passionate about building technology that drives results.",
+  skills: ["Finacle Customization","Finacle Connect 24","Finacle FI Services","React","Next.js","vite", "Django", "GraphQL", "TypeScript","Javascript","Python", "MongoDB","PostgreSQL", "AWS","Electron", "React Native"],
   education: [
     {
       degree: "Bachelor of Engineering in Mechanical Engineering",
@@ -69,7 +68,7 @@ const portfolioData = {
       location: "Remote",
       period: "2021",
       description: "Using AWS console and cli to deploy and manage various AWS resources for web and mobile applications.",
-      achievements: ["Developed new user dashboard", "Implemented responsive design", "Fixed 30+ critical bugs"],
+      // achievements: ["Developed new user dMashboard", "Implemented responsive design", "Fixed 30+ critical bugs"],
     },
   ],
   projects: [
@@ -78,6 +77,12 @@ const portfolioData = {
       description: "Instantly generate high-quality lifestyle photos for your site, marketplace, social media & ad campaign without ever needing a professional photoshoot",
       image: "/placeholder.svg?height=300&width=400",
       link: "https://cloth2life.ai/",
+    },
+    {
+      title: "Plugged Ai",
+      description: "A serverless platform for hosting, managing, and integrating AI agents and MCP servers. Scale your AI applications effortlessly with our powerful infrastructure.",
+      image: "/placeholder.svg?height=300&width=400",
+      link: "https://pluged.ai/",
     },
     {
       title: "Eazy Editor Mobile App",
@@ -107,7 +112,7 @@ const portfolioData = {
       title: "BTC Website Template",
       description: "Template for a website that sells Bitcoin and other cryptocurrencies",
       image: "/placeholder.svg?height=300&width=400",
-      link: "https://example.com/project2",
+      link: "https://peer-to-peer-ten.vercel.app/",
     },
     {
       title: "ARBPUP Clone",

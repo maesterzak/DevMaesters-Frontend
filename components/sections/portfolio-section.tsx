@@ -4,16 +4,20 @@ import Link from "next/link"
 import Image from "next/image"
 
 export function PortfolioSection() {
-  const projects = [
+  
+    
+  let projects= [
     {
-      title: "E-commerce Platform",
-      description: "A modern e-commerce solution built with Next.js and Stripe",
+      title: "Cloth2Life",
+      description: "Instantly generate high-quality lifestyle photos for your site, marketplace, social media & ad campaign without ever needing a professional photoshoot",
       image: "/placeholder.svg?height=300&width=400",
+      link: "https://cloth2life.ai/",
     },
     {
-      title: "Task Management App",
-      description: "A collaborative task management tool with real-time updates",
+      title: "Plugged Ai",
+      description: "A serverless platform for hosting, managing, and integrating AI agents and MCP servers. Scale your AI applications effortlessly with our powerful infrastructure.",
       image: "/placeholder.svg?height=300&width=400",
+      link: "https://pluged.ai/",
     },
   ]
 

@@ -28,7 +28,7 @@ export default function AboutPage() {
           </div>
           <div>
             <Image
-              src="/placeholder.svg?height=300&width=400"
+              src="/devmaesters-logo.png?height=300&width=400"
               alt="Team collaboration"
               width={400}
               height={300}

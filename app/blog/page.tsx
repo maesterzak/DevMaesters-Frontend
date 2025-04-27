@@ -140,7 +140,7 @@ export default function BlogPage() {
                         __html: dompurify.sanitize(truncate(post.body)),
                       }}>
                     </p>
-                    <p className="mt-4 text-sm text-primary">{post.updated_date}</p>
+                    <p className="mt-4 text-sm text-primary">{post.published_date}</p>
                   </div>
                 </Link>
               ))}

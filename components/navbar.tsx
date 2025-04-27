@@ -45,7 +45,8 @@ export function Navbar() {
           </Sheet>
           <Link href="/" className="flex items-center space-x-2">
             <Image
-              src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DEVMAESTERS_y9x500-d1GDOSPqVP83AMi8uQZqVqgPAIR7HR.png"
+              src="/devmaesters-logo.png"
+              //src="https://hebbkx1anhila5yf.public.blob.vercel-storage.com/DEVMAESTERS_y9x500-d1GDOSPqVP83AMi8uQZqVqgPAIR7HR.png"
               alt="DevMaesters Logo"
               width={32}
               height={32}
