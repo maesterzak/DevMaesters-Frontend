@@ -79,7 +79,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
   useEffect(() => {
     const fetchPost = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/post-detail/${resolvedParams.slug}/`);
+        const response = await fetch(`/api/blog/${resolvedParams.slug}/`);
         if (!response.ok) {
           throw new Error('Failed to fetch post');
         }
@@ -161,8 +161,8 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
     );
   }
 
-  const { post, similar_post, tags } = postData;
-console.log("post",postData)
+  const { post, similar_post, tags } = postData?.data;
+
   return (
     <main className="min-h-screen bg-background">
       <Navbar />
@@ -204,11 +204,11 @@ console.log("post",postData)
 
           {post.video && (
             <>
-              <Separator className="my-8" />
-              <section className="my-8">
-                <h2 className="text-2xl font-bold mb-4">Video Content</h2>
+          <Separator className="my-8" />
+          <section className="my-8">
+            <h2 className="text-2xl font-bold mb-4">Video Content</h2>
                 <YouTubeEmbed videoId={post.video} title={post.title} />
-              </section>
+          </section>
             </>
           )}
 

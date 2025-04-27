@@ -6,7 +6,7 @@ const getPosts = async () => {
     throw new Error('Failed to fetch posts');
   }
   let responseJson = await response.json();
-  console.log(responseJson);
+
   return responseJson;
 }
 

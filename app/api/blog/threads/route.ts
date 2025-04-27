@@ -6,29 +6,29 @@ export async function GET(request: NextRequest) {
     const page = searchParams.get('page');
     
     const url = page 
-      ? `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/?page=${page}`
-      : `${process.env.NEXT_PUBLIC_API_URL}/blog/posts/`;
+      ? `${process.env.NEXT_PUBLIC_API_URL}/blog/threads/?page=${page}`
+      : `${process.env.NEXT_PUBLIC_API_URL}/blog/threads/`;
 
     const response = await fetch(url);
     if (!response.ok) {
-      throw new Error('Failed to fetch posts');
+      throw new Error('Failed to fetch threads');
     }
     
-    let data = await response.json();
-  
+    const data = await response.json();
+    
     // Transform the next URL to use our API route
     if (data.next) {
       const nextUrl = new URL(data.next);
       const nextPage = nextUrl.searchParams.get('page');
-      data.next = nextPage ? `https://localhost:3000/api/blog/postlist?page=${nextPage}` : 'https://localhost:3000/api/blog/postlist';
+      data.next = nextPage ? `/api/blog/threads?page=${nextPage}` : '/api/blog/threads';
     }
 
     return NextResponse.json({ data }, { status: 200 });
   } catch (error) {
-    console.error('Error fetching posts:', error);
+    console.error('Error fetching threads:', error);
     return NextResponse.json(
-      { error: "Failed to fetch posts" },
+      { error: "Failed to fetch threads" },
       { status: 500 }
     );
   }
-}
+} 

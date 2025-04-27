@@ -35,7 +35,7 @@ export function NewThreadModal() {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault()
     // Handle form submission
-    console.log(formData)
+
     setOpen(false)
   }
 

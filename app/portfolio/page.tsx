@@ -196,11 +196,11 @@ export default function PortfolioPage() {
       )
       .then(
         (response) => {
-          console.log("SUCCESS!", response.status, response.text);
+          
           toast.success("Message sent successfully!");
         },
         (err) => {
-          console.log("FAILED...", err);
+        
           toast.error("Failed to send message. Please try again.");
         }
       );

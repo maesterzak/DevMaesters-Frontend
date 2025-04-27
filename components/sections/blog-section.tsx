@@ -83,18 +83,24 @@ export function BlogSection() {
           featuredPosts.map((post) => (
             <div
               key={post.id}
-              className="group relative overflow-hidden rounded-lg border bg-background transition-all hover:shadow-md"
-            >
-              <Image
+            className="group relative overflow-hidden rounded-lg border bg-background transition-all hover:shadow-md"
+          >
+            <Image
                 src={post.image ? orig + post.image : "/placeholder.svg"}
-                alt={post.title}
-                width={400}
-                height={200}
-                className="object-cover transition-transform group-hover:scale-105"
-              />
-              <div className="p-6">
-                <h3 className="font-semibold">{post.title}</h3>
-                <p className="mt-2 text-sm text-muted-foreground">{post.excerpt}</p>
+              alt={post.title}
+              width={400}
+              height={200}
+              className="object-cover transition-transform group-hover:scale-105"
+            />
+            <div className="p-6">
+            <Link
+                  
+                  href={`/blog/${post.id}`}
+                  className="group relative overflow-hidden rounded-lg border bg-background transition-all hover:shadow-md"
+                >
+              <h3 className="font-semibold">{post.title}</h3>
+              </Link>
+              <p className="mt-2 text-sm text-muted-foreground">{post.excerpt}</p>
                 <div className="mt-4 flex items-center text-sm text-muted-foreground">
                   <span>{post.author.username}</span>
                   <span className="mx-2">•</span>

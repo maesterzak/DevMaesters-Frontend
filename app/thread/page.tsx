@@ -32,14 +32,13 @@ export default function ThreadsPage() {
   useEffect(() => {
     const fetchThreads = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/threads/`);
+        const response = await fetch('/api/blog/threads');
         if (!response.ok) {
           throw new Error('Failed to fetch threads');
         }
         const data = await response.json();
-        console.log("data",data)  
-        setThreads(data.results);
-        setNextPageUrl(data.next);
+        setThreads(data.data.results);
+        setNextPageUrl(data.data.next);
       } catch (error) {
         toast({
           variant: "destructive",
@@ -62,8 +61,8 @@ export default function ThreadsPage() {
         throw new Error('Failed to fetch more threads');
       }
       const data = await response.json();
-      setThreads(prevThreads => [...prevThreads, ...data.results]);
-      setNextPageUrl(data.next);
+      setThreads(prevThreads => [...prevThreads, ...data.data.results]);
+      setNextPageUrl(data.data.next);
     } catch (error) {
       toast({
         variant: "destructive",

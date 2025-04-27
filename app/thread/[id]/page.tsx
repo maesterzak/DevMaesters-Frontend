@@ -58,13 +58,12 @@ export default function ThreadDetailPage({ params }: { params: Promise<{ id: str
   useEffect(() => {
     const fetchThread = async () => {
       try {
-        const response = await fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/thread-detail/${resolvedParams.id}/`);
+        const response = await fetch(`/api/blog/threads/${resolvedParams.id}`);
         if (!response.ok) {
           throw new Error('Failed to fetch thread');
         }
         const data = await response.json();
-        console.log("data", data);
-        setThread(data);
+        setThread(data.data);
       } catch (err) {
         setError(err instanceof Error ? err.message : 'An error occurred');
         toast({
@@ -98,13 +97,36 @@ export default function ThreadDetailPage({ params }: { params: Promise<{ id: str
     }
 
     try {
-      // Here you would typically make an API call to submit the reply
-      // For now, we'll just show a success message
+      const response = await fetch(`/api/blog/threads/${resolvedParams.id}`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          content: reply,
+        }),
+      });
+
+      if (!response.ok) {
+        throw new Error('Failed to submit reply');
+      }
+
+      const newReply = await response.json();
+      setThread(prev => {
+        if (!prev) return null;
+        return {
+          ...prev,
+          threads: {
+            ...prev.threads,
+            thread_messages: [...prev.threads.thread_messages, newReply.data],
+          },
+        };
+      });
+      setReply("");
       toast({
         title: "Reply submitted",
         description: "Your reply has been posted successfully.",
       });
-      setReply("");
     } catch (error) {
       toast({
         variant: "destructive",

@@ -41,13 +41,13 @@ export default function BlogPage() {
       setIsLoading(true);
       try {
         const [postsData, categoriesData] = await Promise.all([
-          getPosts(),
-          fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories/`).then(res => res.json())
+          fetch('/api/blog/postlist').then(res => res.json()),
+          fetch('/api/blog/categories').then(res => res.json())
         ]);
         
-        setPosts(postsData.results);
+        setPosts(postsData.data.results);
         setCategories(categoriesData);
-        setNextPageUrl(postsData.next);
+        setNextPageUrl(postsData.data.next);
       } catch (error) {
         console.error("Error fetching data:", error);
       } finally {
@@ -62,11 +62,13 @@ export default function BlogPage() {
     
     setIsLoading(true)
     try {
-      const response = await fetch(nextPageUrl);
+      const page = new URL(nextPageUrl).searchParams.get('page');
+      const response = await fetch(`/api/blog/postlist?page=${page}`);
+      
       const newData = await response.json();
       
-      setPosts(prevPosts => [...prevPosts, ...newData.results]);
-      setNextPageUrl(newData.next);
+      setPosts(prevPosts => [...prevPosts, ...newData?.data?.results]);
+      setNextPageUrl(newData?.data?.next);
     } catch (error) {
       console.error("Error loading more posts:", error);
     } finally {
@@ -117,7 +119,7 @@ export default function BlogPage() {
 
           <div className="flex-1">
             <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3">
-              {posts.map((post, index) => (
+              {posts?.map((post, index) => (
                 <Link
                   key={index}
                   href={`/blog/${post.id}`}
