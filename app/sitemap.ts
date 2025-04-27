@@ -5,7 +5,9 @@ const getPosts = async () => {
   if (!response.ok) {
     throw new Error('Failed to fetch posts');
   }
-  return response.json();
+  let responseJson = await response.json();
+  console.log(responseJson);
+  return responseJson;
 }
 
 const getThreads = async () => {
@@ -13,7 +15,10 @@ const getThreads = async () => {
   if (!response.ok) {
     throw new Error('Failed to fetch threads');
   }
-  return response.json();
+  let responseJson = await response.json();
+  //console.log(responseJson);
+
+  return responseJson;
 }
 
 const getValidDate = (dateString: string | null | undefined) => {
@@ -48,15 +53,15 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ]);
 
     // Blog post routes
-    const postRoutes = posts.results.map((post: { slug: string; updated_at: string }) => ({
-      url: `${baseUrl}/blog/${post.slug}`,
+    const postRoutes = posts.map((post: { id: any; updated_at: string }) => ({
+      url: `${baseUrl}/blog/${post.id}`,
       lastModified: getValidDate(post.updated_at),
       changeFrequency: 'weekly' as const,
       priority: 0.7,
     }));
 
     // Thread routes
-    const threadRoutes = threads.results.map((thread: { id: number; last_active: string }) => ({
+    const threadRoutes = threads.map((thread: { id: number; last_active: string }) => ({
       url: `${baseUrl}/threads/${thread.id}`,
       lastModified: getValidDate(thread.last_active),
       changeFrequency: 'daily' as const,

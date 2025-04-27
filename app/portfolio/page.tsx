@@ -8,6 +8,10 @@ import { Badge } from "@/components/ui/badge"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Github, Twitter, Linkedin, Mail, Globe, Building2, GraduationCap, Calendar } from "lucide-react"
 import Image from "next/image"
+import emailjs from "@emailjs/browser";
+import { useState } from "react";
+import { ToastContainer, toast } from 'react-toastify';
+
 
 // This would typically come from a database or API
 const portfolioData = {
@@ -111,6 +115,12 @@ const portfolioData = {
       image: "/placeholder.svg?height=300&width=400",
       link: "https://crypt-wheat.vercel.app/",
     },
+    {
+      title: "Juno Blog",
+      description: "Basic blog app built with Next JS, Tailwind CSS",
+      image: "/placeholder.svg?height=300&width=400",
+      link: "https://sammy-blog01.vercel.app/",
+    },
   ],
   contact: {
     email: "abubakarzakari1703@gmail.com",
@@ -166,51 +176,47 @@ function TimelineItem({
   )
 }
 
-const SendMessage = (params) => {
-  const templateParams = {
-    to_name: "Abubakar Zakari",
-    notes: "Message from Portfolio",
-    from_name: params.name,
-    message: params.message,
-    email: params.email,
-    name: params.name,
-    //organistaion: params.organistaion,
+export default function PortfolioPage() {
+  const SendMessage = (params: Record<string, string>) => {
+    const templateParams = {
+      to_name: "Abubakar Zakari",
+      notes: "Message from Portfolio",
+      from_name: params.name,
+      message: params.message,
+      email: params.email,
+      name: params.name,
+    };
+
+    emailjs
+      .send(
+        "service_dpjmqsh",
+        "template_ps49c1n",
+        templateParams,
+        "jeBPuKHuxwkms83n1"
+      )
+      .then(
+        (response) => {
+          console.log("SUCCESS!", response.status, response.text);
+          toast.success("Message sent successfully!");
+        },
+        (err) => {
+          console.log("FAILED...", err);
+          toast.error("Failed to send message. Please try again.");
+        }
+      );
   };
 
-  emailjs
-    .send(
-      "service_dpjmqsh",
-      "template_ps49c1n",
-      templateParams,
-      "jeBPuKHuxwkms83n1"
-    )
-    .then(
-      (response) => {
-        console.log("SUCCESS!", response.status, response.text);
-        setSubmitDet({
-          type: "success",
-        });
-      },
-      (err) => {
-        console.log("FAILED...", err);
-        setSubmitDet({
-          type: "error",
-        });
-      }
-    );
-};
-const submitHandler = (e) => {
-  e.preventDefault();
-  var formData = new FormData(e.target);
+  const submitHandler = (e: React.FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
+    const formData = new FormData(e.currentTarget);
+    const form_values = Object.fromEntries(formData) as Record<string, string>;
+    SendMessage(form_values);
+    e.currentTarget.reset();
+  };
 
-  const form_values = Object.fromEntries(formData);
-  SendMessage(form_values);
-  e.target.reset();
-};
-
-export default function PortfolioPage() {
   return (
     <main className="min-h-screen bg-background">
+      <ToastContainer position="top-right" autoClose={3000} />
       <Navbar />
       <div className="container py-24">
         <div className="grid gap-12 lg:grid-cols-3">

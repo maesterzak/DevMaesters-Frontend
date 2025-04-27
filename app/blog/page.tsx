@@ -12,83 +12,50 @@ import { LoadingOverlay } from "@/components/loading-overlay"
 import { getPosts } from "@/components/function/getBlogPosts"
 import dompurify from "isomorphic-dompurify";
 
-const categories = [
-  { id: "all", name: "All Posts", count: 42 },
-  { id: "tutorials", name: "Tutorials", count: 15 },
-  { id: "guides", name: "Guides", count: 12 },
-  { id: "news", name: "News", count: 8 },
-  { id: "case-studies", name: "Case Studies", count: 7 },
-]
+interface Category {
+  id: number;
+  name: string;
+  post_count: number;
+}
 
-const blogPosts = [
-  {
-    slug: "getting-started-with-nextjs",
-    title: "Getting Started with Next.js",
-    excerpt: "Learn the basics of Next.js and start building modern web applications.",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2023-06-01",
-    category: "tutorials",
-  },
-  {
-    slug: "understanding-typescript",
-    title: "Understanding TypeScript",
-    excerpt: "Deep dive into TypeScript features and best practices.",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2023-06-05",
-    category: "guides",
-  },
-  {
-    slug: "modern-css-techniques",
-    title: "Modern CSS Techniques",
-    excerpt: "Explore the latest CSS features and how to use them effectively.",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2023-06-10",
-    category: "news",
-  },
-  {
-    slug: "react-hooks-explained",
-    title: "React Hooks Explained",
-    excerpt: "Master the use of React Hooks to create more efficient components.",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2023-06-15",
-    category: "tutorials",
-  },
-  {
-    slug: "building-restful-apis",
-    title: "Building RESTful APIs",
-    excerpt: "Learn how to design and implement RESTful APIs for your applications.",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2023-06-20",
-    category: "guides",
-  },
-  {
-    slug: "introduction-to-graphql",
-    title: "Introduction to GraphQL",
-    excerpt: "Discover the benefits of GraphQL and how to use it in your projects.",
-    image: "/placeholder.svg?height=200&width=400",
-    date: "2023-06-25",
-    category: "case-studies",
-  },
-]
-
-const sanitizer = dompurify.sanitize;
+interface Post {
+  id: number;
+  title: string;
+  body: string;
+  image: string;
+  category: {
+    name: string;
+  };
+  updated_date: string;
+}
 
 export default function BlogPage() {
   const [isLoading, setIsLoading] = useState(false)
-  const [posts, setPosts] = useState([])
+  const [posts, setPosts] = useState<Post[]>([])
+  const [categories, setCategories] = useState<Category[]>([])
   const [nextPageUrl, setNextPageUrl] = useState<string | null>(null)
   const orig = process.env.NEXT_PUBLIC_ORIG_URL
   
   useEffect(() => {
-    const fetchPosts = async () => {
-      let posts = await getPosts()
-      
-      console.log("posts", posts)
-      setPosts(posts.results)
-      setNextPageUrl(posts.next)
-    }
-    fetchPosts()
-  }, [])
+    const fetchData = async () => {
+      setIsLoading(true);
+      try {
+        const [postsData, categoriesData] = await Promise.all([
+          getPosts(),
+          fetch(`${process.env.NEXT_PUBLIC_API_URL}/blog/categories/`).then(res => res.json())
+        ]);
+        
+        setPosts(postsData.results);
+        setCategories(categoriesData);
+        setNextPageUrl(postsData.next);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchData();
+  }, []);
 
   const loadMorePosts = async () => {
     if (!nextPageUrl) return;
@@ -106,9 +73,8 @@ export default function BlogPage() {
       setIsLoading(false)
     }
   }
-  console.log("postswww",posts)
 
-  const truncate = (str) => {
+  const truncate = (str: string) => {
     return str.length > 50 ? str.substring(0, 100) + "..." : str;
   };
 
@@ -141,7 +107,7 @@ export default function BlogPage() {
                   <Button key={category.id} variant="ghost" className="w-full justify-start">
                     {category.name}
                     <Badge variant="secondary" className="ml-auto">
-                      {category.count}
+                      {category.post_count}
                     </Badge>
                   </Button>
                 ))}
@@ -169,7 +135,7 @@ export default function BlogPage() {
                     <h2 className="font-semibold group-hover:text-primary transition-colors">{post.title}</h2>
                     <p className="mt-2 text-sm text-muted-foreground"
                     dangerouslySetInnerHTML={{
-                        __html: sanitizer(truncate(post.body)),
+                        __html: dompurify.sanitize(truncate(post.body)),
                       }}>
                     </p>
                     <p className="mt-4 text-sm text-primary">{post.updated_date}</p>

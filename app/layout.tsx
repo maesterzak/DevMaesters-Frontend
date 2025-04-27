@@ -1,6 +1,8 @@
 import { ThemeProvider } from "@/components/theme-provider"
 import "./globals.css"
 import type { Metadata } from "next"
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 export const metadata: Metadata = {
   title: "DevMaesters",
@@ -18,6 +20,7 @@ export default function RootLayout({
       <body>
         <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
           {children}
+          <ToastContainer position="top-right" autoClose={3000} />
         </ThemeProvider>
       </body>
     </html>
