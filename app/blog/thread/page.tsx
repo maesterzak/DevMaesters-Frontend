@@ -101,7 +101,7 @@ export default function ThreadsPage() {
               <div className="flex justify-between items-start mb-4">
                 <div>
                   <Link
-                    href={`/thread/${thread.id}`}
+                    href={`/blog/thread/${thread.id}`}
                     className="text-xl font-semibold hover:text-primary transition-colors"
                   >
                     {thread.title}
