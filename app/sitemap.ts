@@ -28,7 +28,7 @@ const getValidDate = (dateString: string | null | undefined) => {
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  const baseUrl = process.env.NEXT_PUBLIC_ORIG_URL || 'http://localhost:3000';
+  const baseUrl = process.env.NEXT_PUBLIC_ORIG_URL || 'https://devmaesters.com';
 
   // Static routes
   const staticRoutes = [
@@ -62,7 +62,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
 
     // Thread routes
     const threadRoutes = threads.map((thread: { id: number; last_active: string }) => ({
-      url: `${baseUrl}/threads/${thread.id}`,
+      url: `${baseUrl}/blog/thread/${thread.id}`,
       lastModified: getValidDate(thread.last_active),
       changeFrequency: 'daily' as const,
       priority: 0.6,
