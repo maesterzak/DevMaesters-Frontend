@@ -16,7 +16,7 @@ export function ThreadsSection() {
         </p>
         <div className="mt-8">
           <Button asChild>
-            <Link href="/threads">Browse Threads</Link>
+            <Link href="/blog/thread">Browse Threads</Link>
           </Button>
         </div>
       </div>
