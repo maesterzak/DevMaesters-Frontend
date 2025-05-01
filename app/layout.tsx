@@ -6,13 +6,13 @@ import 'react-toastify/dist/ReactToastify.css';
 import { Inter } from "next/font/google";
 import { Navbar } from "@/components/navbar";
 import GoogleAnalytics from "@/components/google-analytics";
+import { CookieConsent } from "@/components/cookie-consent"
 
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: "DevMaesters",
-  description: "Web Development Blog and Community",
-  generator: 'v0.dev'
+  description: "Web Development Blog and Community"
 }
 
 export default function RootLayout({
@@ -28,6 +28,7 @@ export default function RootLayout({
           {children}
           <ToastContainer position="top-right" autoClose={3000} />
           <GoogleAnalytics GA_MEASUREMENT_ID={process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID || ''} />
+          <CookieConsent />
         </ThemeProvider>
       </body>
     </html>
