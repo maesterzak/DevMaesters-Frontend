@@ -168,7 +168,7 @@ export default function PrivacyPolicyPage() {
             <p>
               If you have any questions about this Privacy Policy, please contact us at:
               <br />
-              Email: privacy@devmaesters.com
+              Email: abubakarzakari1703@gmail.com
             </p>
           </section>
 
