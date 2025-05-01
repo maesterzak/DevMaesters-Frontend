@@ -235,7 +235,7 @@ export default function ThreadDetailPage({ params }: { params: Promise<{ id: str
             <div className="grid gap-4">
               {thread.similar_content.map((similar) => (
                 <div key={similar.id} className="bg-card rounded-lg p-4 hover:shadow-md transition-shadow">
-                  <Link href={`/thread/${similar.id}`} className="text-lg font-semibold mb-2">{similar.title}</Link>
+                  <Link href={`/blog/thread/${similar.id}`} className="text-lg font-semibold mb-2">{similar.title}</Link>
                   
                 </div>
               ))}
