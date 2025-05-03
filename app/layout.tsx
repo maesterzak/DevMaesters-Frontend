@@ -11,8 +11,9 @@ import { CookieConsent } from "@/components/cookie-consent"
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "DevMaesters",
-  description: "Web Development Blog and Community"
+  title: "DevMaesters | Programming Tutorials, Projects & Developer Community",
+  description: "DevMaesters is a full-stack development hub offering programming tutorials, project showcases, and a vibrant developer community. Explore in-depth articles, hands-on projects, and structured learning paths to enhance your coding skills",
+  keywords: "DevMaesters, programming tutorials, web development, full-stack development, developer community, coding projects, learning paths, Django, React, Next.js, Electron, React Native"
 }
 
 export default function RootLayout({

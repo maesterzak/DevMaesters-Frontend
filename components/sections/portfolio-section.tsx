@@ -14,8 +14,8 @@ export function PortfolioSection() {
       link: "https://cloth2life.ai/",
     },
     {
-      title: "Plugged Ai",
-      description: "A serverless platform for hosting, managing, and integrating AI agents and MCP servers. Scale your AI applications effortlessly with our powerful infrastructure.",
+      title: "DevMaesters Website",
+      description: "DevMaesters is a full-stack development hub offering programming tutorials, project showcases, and a vibrant developer community. Explore in-depth articles, hands-on projects, and structured learning paths to enhance your coding skills",
       image: "/placeholder.svg?height=300&width=400",
       link: "https://pluged.ai/",
     },
