@@ -13,7 +13,10 @@ const inter = Inter({ subsets: ["latin"] });
 export const metadata: Metadata = {
   title: "DevMaesters | Programming Tutorials, Projects & Developer Community",
   description: "DevMaesters is a full-stack development hub offering programming tutorials, project showcases, and a vibrant developer community. Explore in-depth articles, hands-on projects, and structured learning paths to enhance your coding skills",
-  keywords: "DevMaesters, programming tutorials, web development, full-stack development, developer community, coding projects, learning paths, Django, React, Next.js, Electron, React Native"
+  keywords: "DevMaesters, programming tutorials, web development, full-stack development, developer community, coding projects, learning paths, Django, React, Next.js, Electron, React Native",
+  icons: {
+      icon: '/devmaesters-logo.png', // or .png
+    },
 }
 
 export default function RootLayout({
