@@ -49,6 +49,18 @@ export function ContactSection() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const form_values = Object.fromEntries(formData) as Record<string, string>;
+    if (!form_values.name || !form_values.email || !form_values.message) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+    if(!/\S+@\S+\.\S+/.test(form_values.email)){
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if(form_values.message.length < 10){
+      toast.error("Invalid message detected.");
+      return;
+    }
     SendMessage(form_values);
     e.currentTarget.reset();
   };

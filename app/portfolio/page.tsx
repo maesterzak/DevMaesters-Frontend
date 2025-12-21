@@ -11,6 +11,7 @@ import Image from "next/image"
 import emailjs from "@emailjs/browser";
 import { useState } from "react";
 import { ToastContainer, toast } from 'react-toastify';
+import { describe } from "node:test"
 
 
 // This would typically come from a database or API
@@ -54,7 +55,7 @@ const portfolioData = {
     },
     {
       title: "Full Stack Developer",
-      company: "DevMaesters",
+      company: "DevMaesters-Freelancer",
       location: "Remote",
       period: "2019 - present",
       description: "Developed and maintained multiple client projects using React, Next js, Django, and PostgreSQL.",
@@ -78,12 +79,12 @@ const portfolioData = {
       image: "/placeholder.svg?height=300&width=400",
       link: "https://cloth2life.ai/",
     },
-    {
-      title: "Plugged Ai",
-      description: "A serverless platform for hosting, managing, and integrating AI agents and MCP servers. Scale your AI applications effortlessly with our powerful infrastructure.",
-      image: "/placeholder.svg?height=300&width=400",
-      link: "https://pluged.ai/",
-    },
+   {
+    title:"FinMaester App",
+    description:"FinMaester combines smart budgeting, expense tracking, and AI insights to help you take control of your money. See where every penny goes, set monthly budgets, and achieve your financial goals.",
+    image:"/placeholder.svg?height=300&width=400",
+    link:"https://finmaester.netlify.app/"
+   },
     {
       title: "Eazy Editor Mobile App",
       description: "This is a mobile image editing application developed entirely from scratch using ReactNative. The application boasts a wide array of image processing features, including background removal, background blur, background color change, instant image background",
@@ -215,6 +216,19 @@ export default function PortfolioPage() {
     e.preventDefault();
     const formData = new FormData(e.currentTarget);
     const form_values = Object.fromEntries(formData) as Record<string, string>;
+    if (!form_values.name || !form_values.email || !form_values.message) {
+      toast.error("Please fill in all required fields.");
+      return;
+    }
+    if(!/\S+@\S+\.\S+/.test(form_values.email)){
+      toast.error("Please enter a valid email address.");
+      return;
+    }
+    if(form_values.message.length < 10){
+      toast.error("Invalid message detected.");
+      return;
+    }
+
     SendMessage(form_values);
     e.currentTarget.reset();
   };

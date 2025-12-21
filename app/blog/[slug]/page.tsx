@@ -261,7 +261,7 @@ export default function BlogPostPage({ params }: { params: Promise<{ slug: strin
                 value={comment}
                 onChange={(e) => setComment(e.target.value)}
               />
-              <Button onClick={handleCommentSubmit}>Post Comment</Button>
+              <Button disabled onClick={handleCommentSubmit}>Post Comment</Button>
             </div>
 
             <div className="space-y-6">
