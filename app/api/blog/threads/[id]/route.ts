@@ -5,8 +5,9 @@ export async function GET(
   { params }: { params: { id: string } }
 ) {
   try {
+    const { id } = await params;
     const response = await fetch(
-      `${process.env.NEXT_PUBLIC_API_URL}/blog/thread-detail/${params.id}/`
+      `${process.env.NEXT_PUBLIC_API_URL}/blog/thread-detail/${id}/`
     );
     
     if (!response.ok) {
